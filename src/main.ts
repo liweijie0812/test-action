@@ -1,26 +1,21 @@
 import * as core from '@actions/core'
-import { wait } from './wait'
 
-/**
- * The main function for the action.
- * @returns {Promise<void>} Resolves when the action is complete.
- */
-export async function run(): Promise<void> {
-  try {
-    const ms: string = core.getInput('milliseconds')
+import { getLatestTag, getVersion } from './utils'
 
-    // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    core.debug(`Waiting ${ms} milliseconds ...`)
-
-    // Log the current timestamp, wait, then log the new timestamp
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
-
-    // Set outputs for other workflow steps to use
-    core.setOutput('time', new Date().toTimeString())
-  } catch (error) {
-    // Fail the workflow run if an error occurs
-    if (error instanceof Error) core.setFailed(error.message)
+export async function run() {
+  core.info('Hello world!')
+  const token = core.getInput('token')
+  if (!token) {
+    core.setFailed('token is required')
+    return
   }
+
+  const versionFile = core.getInput('version_file') as string | './package.json'
+  const version = getVersion(versionFile)
+  core.info(`version: ${version}`)
+  core.setOutput('version', version)
+
+  const latestTag = getLatestTag(token)
+  core.info(`latest tag: ${latestTag}`)
+  core.setOutput('latest_tag', latestTag)
 }

@@ -1,0 +1,14 @@
+name: Auto Release
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  generator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: liweijie0812/test-action@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
