@@ -3,7 +3,7 @@ name: Auto Release
 on:
   pull_request:
     branches: [main]
-
+    types: [opened, synchronize, reopened, closed]
 jobs:
   generator:
     runs-on: ubuntu-latest
