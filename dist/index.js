@@ -45430,6 +45430,7 @@ async function run() {
         return;
     }
     const versionFile = core.getInput('version_file');
+    core.info(`version_file: ${versionFile}`);
     const version = getVersion(versionFile);
     core.info(`version: ${version}`);
     core.setOutput('version', version);
