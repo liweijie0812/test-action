@@ -45429,7 +45429,7 @@ async function run() {
         core.setFailed('token is required');
         return;
     }
-    const versionFile = core.getInput('version_file');
+    const versionFile = core.getInput('version_file') || './package.json';
     core.info(`version_file: ${versionFile}`);
     const version = getVersion(versionFile);
     core.info(`version: ${version}`);
