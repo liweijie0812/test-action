@@ -34,5 +34,5 @@ export async function getLatestTag(token: string) {
     per_page: 1,
   })
   core.info(`tags: ${JSON.stringify(tags)}`)
-  return tags.data[0].name
+  return tags.data[0]?.name || ''
 }
