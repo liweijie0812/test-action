@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
 
-import { getLatestTag, getVersion } from './utils'
+import { getLatestTag, getVersion } from './utils.js'
 
 export async function run() {
   core.info('Hello world!')
