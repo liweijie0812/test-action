@@ -34849,7 +34849,7 @@ async function getLatestTag(token) {
         repo: github.context.repo.repo,
         per_page: 1,
     });
-    core.info(`tags: ${JSON.stringify(tags)}`);
+    core.debug(`tags: ${JSON.stringify(tags)}`);
     return tags.data[0]?.name || '';
 }
 
