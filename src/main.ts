@@ -10,12 +10,13 @@ export async function run() {
     return
   }
 
-  const versionFile = core.getInput('version_file') as string | './package.json'
+  const versionFile = core.getInput('version_file') as string || './package.json'
+  core.info(`version_file: ${versionFile}`)
   const version = getVersion(versionFile)
   core.info(`version: ${version}`)
   core.setOutput('version', version)
 
-  const latestTag = getLatestTag(token)
-  core.info(`latest tag: ${latestTag}`)
+  const latestTag = await getLatestTag(token)
+  core.info(`latest_tag: ${latestTag}`)
   core.setOutput('latest_tag', latestTag)
 }

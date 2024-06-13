@@ -1,7 +1,6 @@
 import fs from 'node:fs'
 import yaml from 'js-yaml'
 import * as core from '@actions/core'
-import { Octokit } from 'octokit'
 import * as github from '@actions/github'
 
 export function parseJson(path: string) {
@@ -28,14 +27,12 @@ export function getVersion(path: string) {
   }
 }
 export async function getLatestTag(token: string) {
-  const octokit = new Octokit({
-    auth: token,
-  })
+  const octokit = github.getOctokit(token)
   const tags = await octokit.rest.repos.listTags({
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
     per_page: 1,
   })
-
-  return tags.data[0].name
+  core.debug(`tags: ${JSON.stringify(tags)}`)
+  return tags.data[0]?.name || ''
 }
