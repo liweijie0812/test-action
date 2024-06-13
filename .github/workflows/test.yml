@@ -19,7 +19,7 @@ jobs:
       - uses: liweijie0812/test-action@a
         with:
           token: ${{ secrets.GITHUB_TOKEN }} 
-          version_file: ./test/fixtures/yaml/package.json
+          version_file: ./test/fixtures/version/package.json
   yaml:
     runs-on: ubuntu-latest
     steps:
@@ -27,4 +27,4 @@ jobs:
       - uses: liweijie0812/test-action@a
         with:
           token: ${{ secrets.GITHUB_TOKEN }}     
-          version_file: ./test/fixtures/yaml/pubspec.yaml         
+          version_file: ./test/fixtures/version/pubspec.yaml         
