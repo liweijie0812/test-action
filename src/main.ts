@@ -16,7 +16,7 @@ export async function run() {
   core.info(`version: ${version}`)
   core.setOutput('version', version)
 
-  const latestTag = getLatestTag(token)
+  const latestTag = await getLatestTag(token)
   core.info(`latest tag: ${latestTag}`)
   core.setOutput('latest_tag', latestTag)
 }
