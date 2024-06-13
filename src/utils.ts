@@ -33,6 +33,6 @@ export async function getLatestTag(token: string) {
     repo: github.context.repo.repo,
     per_page: 1,
   })
-
+  core.info(`tags: ${JSON.stringify(tags)}`)
   return tags.data[0].name
 }
