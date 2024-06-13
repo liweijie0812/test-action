@@ -34849,6 +34849,7 @@ async function getLatestTag(token) {
         repo: github.context.repo.repo,
         per_page: 1,
     });
+    core.info(`tags: ${JSON.stringify(tags)}`);
     return tags.data[0].name;
 }
 
@@ -34867,7 +34868,7 @@ async function run() {
     const version = getVersion(versionFile);
     core.info(`version: ${version}`);
     core.setOutput('version', version);
-    const latestTag = getLatestTag(token);
+    const latestTag = await getLatestTag(token);
     core.info(`latest tag: ${latestTag}`);
     core.setOutput('latest_tag', latestTag);
 }
