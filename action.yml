@@ -3,7 +3,7 @@ description: tag action
 author: tdesign
 inputs:
   token:
-    description: Token
+    description: GITHUB_TOKEN
     required: true
   version_file:
     description: 获取版本的文件
@@ -12,7 +12,7 @@ outputs:
   version:
     description: 版本号
   laster_tag:
-    description: 最后一个标签号
+    description: 最后一个标签
 runs:
   using: node20
   main: dist/index.js

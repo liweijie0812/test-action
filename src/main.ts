@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
 
-import { getLatestTag, getVersion } from './utils.js'
+import { getLatestTag, getVersion } from './utils'
 
 export async function run() {
   core.info('Hello world!')
@@ -17,6 +17,6 @@ export async function run() {
   core.setOutput('version', version)
 
   const latestTag = await getLatestTag(token)
-  core.info(`latest tag: ${latestTag}`)
+  core.info(`latest_tag: ${latestTag}`)
   core.setOutput('latest_tag', latestTag)
 }
