@@ -5,10 +5,26 @@ on:
     branches: [main]
     types: [opened, synchronize, reopened]
 jobs:
-  generator:
+  defatul:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: liweijie0812/test-action@a
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+  json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: liweijie0812/test-action@a
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} 
+          version_file: ./test/fixtures/yaml/package.json
+  yaml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: liweijie0812/test-action@a
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}     
+          version_file: ./test/fixtures/yaml/pubspec.yaml         
