@@ -33341,7 +33341,7 @@ async function run() {
     core.info(`version: ${version}`);
     core.setOutput('version', version);
     const latestTag = await (0, utils_1.getLatestTag)(token);
-    core.info(`latest tag: ${latestTag}`);
+    core.info(`latest_tag: ${latestTag}`);
     core.setOutput('latest_tag', latestTag);
 }
 exports.run = run;
