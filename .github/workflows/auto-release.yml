@@ -8,6 +8,9 @@ on:
       - 'package.json'
   issue_comment:
     types: [edited]
+    
+permissions:
+  contents: write
 
 jobs:
   generator:
