@@ -2,21 +2,21 @@ name: tag action
 
 on:
   pull_request:
-    branches: [main]
+    branches: [develop]
     types: [opened, synchronize, reopened]
 jobs:
   defatul:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: liweijie0812/test-action@main
+      - uses: liweijie0812/test-action@develop
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
   json:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: liweijie0812/test-action@main
+      - uses: liweijie0812/test-action@develop
         with:
           token: ${{ secrets.GITHUB_TOKEN }} 
           version_file: ./test/fixtures/version/package.json
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: liweijie0812/test-action@main
+      - uses: liweijie0812/test-action@develop
         with:
           token: ${{ secrets.GITHUB_TOKEN }}     
           version_file: ./test/fixtures/version/pubspec.yaml         
