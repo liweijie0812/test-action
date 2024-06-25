@@ -22,7 +22,7 @@ jobs:
             core.debug(`user: ${user}`)
 
             let isReviewer = false;
-            if ('liweijie0812' === `@${user}`) {
+            if ('liweijie0812' === `${user}`) {
                 isReviewer = true
             }
 
