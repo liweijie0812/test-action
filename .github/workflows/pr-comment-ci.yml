@@ -97,9 +97,8 @@ jobs:
           script: |
             const fs = require('fs')
             const doc = fs.readFileSync('.github/pr-common-ci.md', 'utf8')
-            await github.rest.reactions.createForIssueComment({
+            await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                comment_id: context.payload.comment.id,
-                content: doc,
+                body: doc,
             })
