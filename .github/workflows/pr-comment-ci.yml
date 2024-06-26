@@ -89,6 +89,9 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ needs.check.outputs.next_action == 'help' }}
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - name: Render template
         id: template
         uses: chuhlomin/render-template@v1.4
