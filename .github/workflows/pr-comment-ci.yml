@@ -99,7 +99,7 @@ jobs:
             const fs = require('fs')
             const doc = fs.readFileSync('.github/pr-common-ci.md', 'utf8')
             github.rest.issues.createComment({
-              issue_number: github.event.issue.number,
+              issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: '👋 Thanks for reporting!'
