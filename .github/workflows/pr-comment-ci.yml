@@ -36,7 +36,10 @@ jobs:
               }
               if (body.startsWith('/test-common')) {
                 next_action='test-common'
-              }  
+              }
+              if (body.startsWith('/help')) {
+                next_action='help'
+              }      
             } else {
                core.warning('You are not collaborator');
             }
@@ -80,3 +83,25 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git commit -m "chore: update common"
           git push
+
+  help:
+    needs: check
+    runs-on: ubuntu-latest
+    if: ${{ needs.check.outputs.next_action == 'help' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs')
+            const doc = fs.readFileSync('.github/pr-common-ci.md', 'utf8')
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: doc
+            })
+
+
