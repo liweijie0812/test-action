@@ -17,9 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: liweijie0812/test-action@develop
+        id: tag-action
         with:
           token: ${{ secrets.GITHUB_TOKEN }} 
           version_file: ./test/fixtures/version/package.json
+      - run: echo "${{ steps.tag-action.outputs.version }}"     
   yaml:
     runs-on: ubuntu-latest
     steps:
