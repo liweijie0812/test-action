@@ -105,7 +105,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         run: gh pr checkout ${{ github.event.issue.number }} --recurse-submodules
-
+      - run: git submodule update
       - name: Merge develop
 
         run: |
