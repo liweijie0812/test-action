@@ -37,6 +37,9 @@ jobs:
               if (body.startsWith('/test-common')) {
                 next_action='test-common'
               }
+              if (body.startsWith('/resolve-conflict')) {
+                next_action='resolve-conflict'
+              }
               if (body.startsWith('/help')) {
                 next_action='help'
               }      
@@ -63,10 +66,10 @@ jobs:
       - run: git submodule update --remote --merge
       - run: git diff src/_common
       - run: |
-          if [ -z "$(git status --porcelain)" ]; then
+          if [ -z "$(git status --porcelain)" ]; then  
             echo "Working directory clean"
           else
-            echo "Changes detected"
+            echo "Changes detectedfdsfd"
           fi
 
   update-common:
@@ -89,7 +92,29 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git commit -m "chore: update common"
           git push
+  
+  resolve-conflict:
+    needs: check
+    runs-on: ubuntu-latest
+    if: ${{ needs.check.outputs.next_action == 'resolve-conflict' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PERSONAL_TOKEN }}
+      - name: gh checkout pr
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        run: gh pr checkout ${{ github.event.issue.number }}
 
+      - name: Merge develop
+        run: git merge develop --allow-unrelated-histories
+      - name: push to pr
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git commit -am "chore: Merge develop"
+          git push
+          
   help:
     needs: check
     runs-on: ubuntu-latest
