@@ -110,7 +110,9 @@ jobs:
           git branch
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git merge develop --allow-unrelated-histories
+          git status
+          git fetch origin/develop
+          git merge origin/develop 
       - name: push to pr
         run: |
           git commit -am "chore: Merge develop"
