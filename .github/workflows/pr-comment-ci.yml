@@ -114,6 +114,7 @@ jobs:
           git merge develop 
       - name: push to pr
         run: |
+          git add .
           git commit -am "chore: Merge develop"
           git push
           
