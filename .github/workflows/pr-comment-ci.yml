@@ -68,7 +68,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh pr checkout ${{ github.event.issue.number }} --recurse-submodules
       - run: git diff src/_common   
-      - run: git submodule init && git submodule update
+      - run: git submodule update --remote --merge
       - run: git diff src/_common
       - run: |
           git status
