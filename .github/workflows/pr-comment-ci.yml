@@ -56,16 +56,11 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ needs.check.outputs.next_action == 'test-common' }}
     steps:
-      - run: |
-         git init
-         git config --local user.email "github-actions[bot]@users.noreply.github.com"
-         git config --local user.name "github-actions[bot]"
       - uses: actions/checkout@v4
-        with: ${{ github.head_ref }}   
       - name: gh checkout pr
         env:
           GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-        run: gh pr checkout ${{ github.event.issue.number }} --recurse-submodules
+        run: gh pr checkout ${{ github.event.issue.number }} -b pr/${{github.event.issue.number}} --recurse-submodules
       - run: git diff src/_common   
       - run: git submodule update --remote --merge
       - run: git diff src/_common
