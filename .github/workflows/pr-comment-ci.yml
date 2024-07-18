@@ -84,7 +84,7 @@ jobs:
       - name: gh checkout pr
         env:
           GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-        run: gh pr checkout ${{ github.event.issue.number }} -b pr/${{github.event.issue.number}}  --recurse-submodules 
+        run: gh pr checkout ${{ github.event.issue.number }} --recurse-submodules 
       - run: git submodule update --remote --merge
       - uses: stefanzweifel/git-auto-commit-action@v5
         with: 
