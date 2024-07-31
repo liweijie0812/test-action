@@ -43,7 +43,15 @@ jobs:
               }
               if (body.startsWith('/help')) {
                 next_action='help'
-              }      
+              }
+              if(next_action){
+                await github.rest.reactions.createForIssueComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: context.payload.comment.id,
+                  content: '+1',
+                })
+              }
             } else {
                core.warning('You are not collaborator');
             }
