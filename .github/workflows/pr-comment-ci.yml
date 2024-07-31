@@ -50,7 +50,7 @@ jobs:
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   comment_id: context.payload.comment.id,
-                  content: '+1',
+                  content: 'rocket',
                 })
               }
             } else {
