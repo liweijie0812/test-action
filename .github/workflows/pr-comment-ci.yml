@@ -3,7 +3,8 @@ name: PR_COMMENT_CI
 on:
   issue_comment:
     types: [created]
-
+permissions:
+  issues: write
 
 jobs:
   check:
