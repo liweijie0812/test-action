@@ -180,6 +180,8 @@ jobs:
           git status > ~/git-status.txt
           cat ~/git-status.txt
           cat ~/git-status.txt | grep -c 'modified:'
+          cat ~/git-status.txt | grep -c 'both modified:'
+          cat ~/git-status.txt | grep -c 'committed:'
           conflict_count=$(cat ~/git-status.txt | grep -c 'both modified:') 
           working_tree_clean=$(cat ~/git-status.txt | grep -c 'nothing to commit, working tree clean')
           csr_snap_conflict=$(cat ~/git-status.txt | grep 'both modified:' | grep -c 'csr.test.jsx.snap') 
