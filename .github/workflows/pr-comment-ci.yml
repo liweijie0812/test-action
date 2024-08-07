@@ -176,7 +176,8 @@ jobs:
       - name: bash shell
         run: |
           git status
-          conflict_count=$(git status | grep -c 'both modified:')
           
-          echo "conflict_count: $conflict_count"
+          count_both_modified=$(git status | grep -c 'both modified:')
+
+          echo "count_both_modified $count_both_modified"
        
