@@ -167,17 +167,19 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         run: gh pr checkout ${{ github.event.issue.number }} --recurse-submodules
+
       - name: Merge develop
         run: |
-          git branch
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git merge develop --no-commit || true
-
-      - name: test sh
+          
+      - name: Resolve conflict
         run: |
           count_both_modified=$(git status | grep -c 'both modified:')
           both_modified_db=$(git status | grep 'both modified:' | grep -c 'db/TDesign.db')
           echo "count_both_modified $count_both_modified"
           echo "both_modified_db $both_modified_db"
+
+
        
