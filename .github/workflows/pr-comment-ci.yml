@@ -173,13 +173,11 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git merge develop --no-commit || true
+          git status
           
       - name: Resolve conflict
         run: |
-          count_both_modified=$(git status | grep -c 'both modified:')
-          both_modified_db=$(git status | grep 'both modified:' | grep -c 'db/TDesign.db')
-          echo "count_both_modified $count_both_modified"
-          echo "both_modified_db $both_modified_db"
-          exit 0
+          git status | grep -c 'both modified:'
+         
 
        
