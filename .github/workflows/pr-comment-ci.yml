@@ -177,6 +177,8 @@ jobs:
           
       - name: Resolve conflict
         run: |
+          sh .github/script/test-sh.sh
+          
           git status > ~/git-status.txt
           cat ~/git-status.txt
           cat ~/git-status.txt | grep -c 'modified:'
