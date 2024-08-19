@@ -83,6 +83,9 @@ jobs:
             echo "Working directory clean"
           else
             echo "Changes detectedfdsfd"
+            git add .
+            git commit -m "chore: update common"
+            git status
           fi
 
   update-common:
