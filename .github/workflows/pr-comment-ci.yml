@@ -73,7 +73,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         run: gh pr checkout ${{ github.event.issue.number }} -b pr/${{github.event.issue.number}} --recurse-submodules
-      - run: git diff src/_common   
+      - run: git diff src/_common
+      - run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"   
       - run: git submodule update --remote --merge
       - run: git diff src/_common
       - run: git status
