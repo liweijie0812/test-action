@@ -66,7 +66,7 @@ jobs:
   test-common:
     needs: check
     runs-on: ubuntu-latest
-    if: ${{ needs.check.outputs.next_action == 'update-common' }}
+    if: ${{ needs.check.outputs.next_action == 'test-common' }}
     steps:
       - uses: actions/checkout@v4
         with:
