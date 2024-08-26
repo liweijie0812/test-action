@@ -45,9 +45,10 @@ jobs:
               if (body.startsWith('/test-sh')) {
                 next_action='test-sh'
               }  
-              if (body.startsWith('/help')) {
-                next_action='help'
-              }
+              if (body.startsWith('/pkg-pr-new')) {
+                next_action='pkg-pr-new'
+              }  
+              
               if(next_action){
                 await github.rest.reactions.createForIssueComment({
                   owner: context.repo.owner,
@@ -254,6 +255,33 @@ jobs:
           echo "ssr_snap_conflict: $ssr_snap_conflict"
           echo "common_conflict: $common_conflict"
           echo "conflicts_sum: $conflicts_sum"
-         
+  
+  pkg-pr-new:
+    needs: check
+    runs-on: ubuntu-latest
+    if: ${{ needs.check.outputs.next_action == 'pkg-pr-new' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PERSONAL_TOKEN }}
+
+      - name: gh checkout pr
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        run: gh pr checkout ${{ github.event.issue.number }}
+
+      - name: pr commit sha
+        id: pr-commit-sha
+        run: |
+            abbrev_commit_log=$(git log -1 --abbrev=7 --format=%h) || true
+            echo "abbrev_commit_log: $abbrev_commit_log"
+            echo "::set-output name=sha::$abbrev_commit_log"
+
+      - name: print pr sha
+        run: |
+            echo "pr sha: ${{ steps.pr-commit-sha.outputs.sha }}"
+          
+      - run: git status 
 
        
