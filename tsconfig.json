@@ -9,5 +9,5 @@
     "outDir": "./dist", /* Raise error on expressions and declarations with an implied 'any' type. */
     "esModuleInterop": true
   },
-  "exclude": ["node_modules", "./dist", "./test"]
+  "exclude": ["node_modules", "./dist", "./test", "src/_common"]
 }

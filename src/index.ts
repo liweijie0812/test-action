@@ -1,3 +1,3 @@
-import { run } from './main'
+const aa = 'haha'
 
-run()
+export default aa
