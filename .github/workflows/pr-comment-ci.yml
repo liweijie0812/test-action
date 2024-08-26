@@ -20,7 +20,7 @@ jobs:
          id: get-action
          with:
           script: |
-            core.debug(`context: ${JSON.stringify(context)}`)
+            core.info(`context: ${JSON.stringify(context)}`)
             const user = context.payload.comment.user.login
             core.debug(`user: ${user}`)
 
@@ -81,7 +81,10 @@ jobs:
       - name: submodule init and sync remote
         run: |
           git submodule update --init --remote
-
+      - name: log sha
+        run: |
+            abbrev_commit_log=$(git log -1 --abbrev=7 --format=%h) || true
+            echo "abbrev_commit_log: $abbrev_commit_log"
       - name: Commit common
         run: |
           git status
@@ -129,8 +132,14 @@ jobs:
 
           git status
           git commit -am "chore: merge develop"
-      
+
+      - name: log sha
+        run: |
+          abbrev_commit_log=$(git log -1 --abbrev=7 --format=%h) || true
+          echo "abbrev_commit_log: $abbrev_commit_log"
+          
       - run: git status 
+
        
   update-common:
     needs: check
