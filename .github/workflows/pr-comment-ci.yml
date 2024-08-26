@@ -270,7 +270,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         run: gh pr checkout ${{ github.event.issue.number }}
-
+      - run: pnpm build
       - name: pr commit sha
         id: pr-commit-sha
         run: |
@@ -281,6 +281,7 @@ jobs:
       - name: print pr sha
         run: |
             echo "pr sha: ${{ steps.pr-commit-sha.outputs.sha }}"
+      - run: npx pkg-pr-new publish
           
       - run: git status 
 
