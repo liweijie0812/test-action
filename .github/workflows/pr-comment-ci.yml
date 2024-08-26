@@ -66,7 +66,7 @@ jobs:
   test-common:
     needs: check
     runs-on: ubuntu-latest
-    if: ${{ needs.check.outputs.next_action == 'update-common' }}
+    if: ${{ needs.check.outputs.next_action == 'test-common' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -77,7 +77,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         run: gh pr checkout ${{ github.event.issue.number }}
-
+      - name: git config
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
       - name: submodule init and sync remote
         run: |
           git submodule update --init --remote
@@ -97,8 +100,6 @@ jobs:
 
       - name: merge develop
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
           git merge develop --no-commit || true
 
       - name: check conflicts
