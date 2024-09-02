@@ -264,13 +264,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-          token: ${{ secrets.PERSONAL_TOKEN }}
-
-      - name: gh checkout pr
-        env:
-          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-        run: gh pr checkout ${{ github.event.issue.number }}
+          ref: refs/pull/${{ github.event.issue.number }}/head
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
