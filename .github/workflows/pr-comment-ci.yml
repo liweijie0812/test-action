@@ -142,6 +142,15 @@ jobs:
           echo "abbrev_commit_log: $abbrev_commit_log"
           
       - run: git status 
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.deleteComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: context.payload.comment.id
+            })
+
 
        
   update-common:
